@@ -6,3 +6,11 @@ body {
     margin: 0;
     background-color: #282a3b;
 }
+
+.column-color {
+    background-color: #1a1b25;
+}
+
+.month-color {
+    color: #898fab
+}
