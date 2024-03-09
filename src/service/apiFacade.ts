@@ -2,7 +2,6 @@ import {handleHttpErrors, makeOptions} from "./fetchUtils.ts";
 
 const API_URL = "https://api.sallinggroup.com/v1/holidays";
 const TOKEN = import.meta.env.VITE_BEARER_TOKEN as string;
-//const TOKEN = "6829b007-0619-4f05-8949-eaf8842b8ffb";
 
 async function getHolidaysForYear(year: number) {
     const options = makeOptions("GET", null, TOKEN);

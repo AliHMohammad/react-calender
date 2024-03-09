@@ -9,7 +9,7 @@ type Props = {
 
 const MONTHS = ["Januar", "Februar", "Marts", "April", "Maj", "Juni", "Juli", "August", "September", "Oktober", "November", "December"];
 
-export default function CalenderRow({month, index, holidays}: Props) {
+export default function CalenderMonth({month, index, holidays}: Props) {
     const year = new Date().getFullYear();
 
     return (

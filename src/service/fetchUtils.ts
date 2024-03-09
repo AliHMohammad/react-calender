@@ -7,16 +7,16 @@ export function makeOptions(method: string, body: object | null, token?: string)
     if (token) headers.append("Authorization", `Bearer ${token}`);
 
 
-    const opts: RequestInit = {
+    const options: RequestInit = {
         method: method,
         headers: headers
     };
 
     if (body) {
-        opts.body = JSON.stringify(body);
+        options.body = JSON.stringify(body);
     }
 
-    return opts;
+    return options;
 }
 
 export async function handleHttpErrors(res:Response) {

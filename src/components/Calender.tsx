@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import CalenderRow from "./CalenderRow.tsx";
+import CalenderMonth from "./CalenderMonth.tsx";
 import {getHolidaysForYear} from "../service/apiFacade.ts";
 import IHoliday from "../models/IHoliday.ts";
 
@@ -46,8 +46,8 @@ export default function Calender() {
         if (flag) {
             getHolidaysForYear(new Date().getFullYear())
                 .then((res) => setHolidays(res))
-                .catch(() => {
-                    console.log("Failed trying to fetch holidays")
+                .catch((error) => {
+                    console.log("Failed trying to fetch holidays:", error.message);
                 })
         }
 
@@ -58,7 +58,7 @@ export default function Calender() {
 
     return dates && holidays ? (
         <div className="grid grid-cols-6 relative w-[98%] mx-auto">
-            {dates.map((month, i) => <CalenderRow key={i} month={month} index={i} holidays={holidays}/>)}
+            {dates.map((month, i) => <CalenderMonth key={i} month={month} index={i} holidays={holidays}/>)}
         </div>
     ) : <h2>Loading...</h2>
 }
