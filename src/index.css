@@ -12,6 +12,12 @@ body {
     background-color: #1a1b25;
 }
 
-.light-color {
-    color: #898fab
+.column-light-color {
+    background-color: #313447;
 }
+
+.light-color {
+    color: #b1b5db
+}
+
+/*color: #898fab*/
