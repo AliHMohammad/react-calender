@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import CalenderRow from "./CalenderRow.tsx";
-import {getHolidays} from "../service/apiFacade.ts";
+import {getHolidaysForYear} from "../service/apiFacade.ts";
 
 
 const options: Intl.DateTimeFormatOptions = {
@@ -23,7 +23,7 @@ export default function Calender() {
 
     useEffect(() => {
         const date = new Date(new Date().getFullYear(), 0, 1);
-        const save: string[][] = [[]];
+        const datesArr: string[][] = [[]];
 
         let month = 0;
         let dateNum = 0;
@@ -31,25 +31,31 @@ export default function Calender() {
             if (date.getMonth() !== 0 && date.getDate() === 1) {
                 month++;
                 dateNum = 0;
-                save[month] = [];
+                datesArr[month] = [];
             }
 
-            save[month][dateNum] = new Intl.DateTimeFormat("da-DK", options).format(date);
+            datesArr[month][dateNum] = new Intl.DateTimeFormat("da-DK", options).format(date);
 
             date.setDate(date.getDate() + 1);
             dateNum++;
         }
 
-        setDates(save);
+        setDates(datesArr);
     }, []);
 
 
     useEffect(() => {
-        try {
-            //const result =  getHolidays(new Date().getFullYear());
+        let flag = true;
 
-            //setHolidays(result);
-            console.log(holidays)
+        try {
+            if (flag) {
+                const result =  getHolidaysForYear(new Date().getFullYear());
+                //setHolidays(result);
+                console.log(holidays)
+            }
+            return () => {
+                flag = false;
+            }
         } catch (e) {
             console.log(e);
         }

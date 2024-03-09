@@ -19,7 +19,7 @@ export default function CalenderColumn({date}: Props) {
 
     return (
         <div className={`grid grid-cols-2 border border-gray-700 ${letter == "S" ? "column-light-color": "column-color"}`}>
-            <div className={`inline-block ${letter == "L" && "column-light-color"}`}>
+            <div >
                 <span className="mx-1.5 w-3 text-center light-color">{letter}</span>
                 <span className="w-3 light-color">{dayNumber}</span>
             </div>
@@ -31,3 +31,4 @@ export default function CalenderColumn({date}: Props) {
         </div>
     )
 }
+//className={`inline-block ${letter == "L" && "column-light-color"}`}
