@@ -1,13 +1,13 @@
+import Calender from "./components/Calender.tsx";
 
 
 function App() {
+    return (
+        <>
 
-
-  return (
-    <>
-
-    </>
-  )
+            <Calender/>
+        </>
+    )
 }
 
 export default App
