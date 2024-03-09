@@ -12,7 +12,7 @@ export default function CalenderRow({month, index}: Props) {
 
     return (
         <div>
-            <h2 className="text-center font-bold month-color my-1">{`${MONTHS[index]}   ${year}`}</h2>
+            <h2 className="text-center font-bold light-color my-1">{`${MONTHS[index]} ${year}`}</h2>
             {month.map((date, i) => {
                 return (
                     <CalenderColumn key={i} date={date}/>

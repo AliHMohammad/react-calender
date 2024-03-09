@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import CalenderColumn from "./CalenderColumn.tsx";
 import CalenderRow from "./CalenderRow.tsx";
+import {getHolidays} from "../service/apiFacade.ts";
 
 
 const options: Intl.DateTimeFormatOptions = {
@@ -10,18 +10,15 @@ const options: Intl.DateTimeFormatOptions = {
     day: "numeric",
 }
 
-type Date = {
+type THoliday = {
     date: string,
-    weekNumber: number;
-}
-
-type DateFather = {
-    date: Date,
-    month: string
+    name: string,
+    nationalHoliday: string
 }
 
 export default function Calender() {
     const [dates, setDates] = useState<string[][] | null>(null);
+    const [holidays, setHolidays] = useState<THoliday | null>(null);
 
 
     useEffect(() => {
@@ -47,9 +44,21 @@ export default function Calender() {
     }, []);
 
 
-    return dates && (
+    useEffect(() => {
+        try {
+            //const result =  getHolidays(new Date().getFullYear());
+
+            //setHolidays(result);
+            console.log(holidays)
+        } catch (e) {
+            console.log(e);
+        }
+    }, []);
+
+
+    return dates ? (
         <div className="grid grid-cols-6 relative w-[98%] mx-auto">
             {dates.map((month, i) => <CalenderRow key={i} month={month} index={i}/>)}
         </div>
-    )
+    ) : <h2>Loading...</h2>
 }

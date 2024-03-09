@@ -5,12 +5,13 @@
 body {
     margin: 0;
     background-color: #282a3b;
+    font-family: Arial;
 }
 
 .column-color {
     background-color: #1a1b25;
 }
 
-.month-color {
+.light-color {
     color: #898fab
 }
