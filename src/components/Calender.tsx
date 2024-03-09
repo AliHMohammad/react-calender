@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import CalenderRow from "./CalenderRow.tsx";
 import {getHolidaysForYear} from "../service/apiFacade.ts";
+import IHoliday from "../models/IHoliday.ts";
 
 
 const options: Intl.DateTimeFormatOptions = {
@@ -10,15 +11,11 @@ const options: Intl.DateTimeFormatOptions = {
     day: "numeric",
 }
 
-type THoliday = {
-    date: string,
-    name: string,
-    nationalHoliday: string
-}
+
 
 export default function Calender() {
     const [dates, setDates] = useState<string[][] | null>(null);
-    const [holidays, setHolidays] = useState<THoliday | null>(null);
+    const [holidays, setHolidays] = useState<IHoliday[] | null>(null);
 
 
     useEffect(() => {
@@ -47,24 +44,25 @@ export default function Calender() {
     useEffect(() => {
         let flag = true;
 
-        try {
-            if (flag) {
-                const result =  getHolidaysForYear(new Date().getFullYear());
-                //setHolidays(result);
-                console.log(holidays)
-            }
-            return () => {
-                flag = false;
-            }
-        } catch (e) {
-            console.log(e);
+        if (flag) {
+            getHolidaysForYear(new Date().getFullYear())
+                .then((res) => setHolidays(res))
+                .catch(() => {
+                    console.log("Failed trying to fetch holidays")
+                })
+        }
+
+        return () => {
+            flag = false;
         }
     }, []);
 
+    console.log(holidays)
 
-    return dates ? (
+
+    return dates && holidays ? (
         <div className="grid grid-cols-6 relative w-[98%] mx-auto">
-            {dates.map((month, i) => <CalenderRow key={i} month={month} index={i}/>)}
+            {dates.map((month, i) => <CalenderRow key={i} month={month} index={i} holidays={holidays}/>)}
         </div>
     ) : <h2>Loading...</h2>
 }
