@@ -13,11 +13,10 @@ function getWeekNumber(day: number, month: number, year: number): number {
     return Math.ceil(( date1.getDay() + 1 + numberOfDays) / 7);
 }
 
-function getHoliday(day: string, month: string, year: string, holidays: IHoliday[]): IHoliday | undefined {
-    const date = `${year}-${month}-${day}`;
-    return holidays.find(holiday => holiday.date === date);
+function getHoliday(paddedDate: string, holidays: IHoliday[]): IHoliday | undefined {
+    //const paddedDate = `${year}-${month}-${day}`;
+    return holidays.find(holiday => holiday.date === paddedDate);
 }
-
 
 export default function CalenderColumn({date, holidays}: Props) {
     const [weekday, dateString] = date.split(" ");
@@ -27,35 +26,21 @@ export default function CalenderColumn({date, holidays}: Props) {
 
 
     if (letter == "M") weekNumber = getWeekNumber(Number(day), Number(month), Number(year));
-    const holiday = getHoliday(day.padStart(2, "0"), month.padStart(2, "0"), year, holidays);
+    const holiday = getHoliday(`${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`, holidays);
+
 
     return (
         <div className={`border border-gray-700 ${letter == "S" || holiday?.nationalHoliday ? "column-light-color": "column-color"}`}>
             <div className="flex justify-between" >
                 <div className={`pr-2 ${letter == "L" && "column-light-color"}`}>
-                    <span className="mx-1.5 text-center light-color">{letter}</span>
-                    <span className="light-color">{day}</span>
+                    <span className="mx-1.5 w-3 light-color">{letter}</span>
+                    <span className="w-3 light-color">{day}</span>
                     {holiday?.nationalHoliday && <span className="mx-1.5 light-color">{holiday.name}</span>}
                 </div>
                 <div>
                     {weekNumber && <span className="mx-1.5 light-color font-bold">{weekNumber}</span>}
                 </div>
             </div>
-
-
-
         </div>
     )
 }
-
-
-//className={`inline-block ${letter == "L" && "column-light-color"}`}
-
-/*
- {weekNumber && (
- <div className="flex justify-end">
-
- <span className="mx-1.5 light-color font-bold">{weekNumber}</span>
- </div>
- )}
- */

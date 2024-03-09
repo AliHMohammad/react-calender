@@ -40,7 +40,6 @@ export default function Calender() {
         setDates(datesArr);
     }, []);
 
-
     useEffect(() => {
         let flag = true;
 
@@ -56,9 +55,6 @@ export default function Calender() {
             flag = false;
         }
     }, []);
-
-    console.log(holidays)
-
 
     return dates && holidays ? (
         <div className="grid grid-cols-6 relative w-[98%] mx-auto">
