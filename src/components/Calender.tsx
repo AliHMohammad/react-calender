@@ -17,29 +17,31 @@ export default function Calender() {
     const [dates, setDates] = useState<string[][] | null>(null);
     const [holidays, setHolidays] = useState<IHoliday[] | null>(null);
 
-
+    //useEffect for getting all the dates in the first 6 months of the current year
+    //Store the result in the useState "dates"
     useEffect(() => {
         const date = new Date(new Date().getFullYear(), 0, 1);
         const datesArr: string[][] = [[]];
 
         let month = 0;
-        let dateNum = 0;
+        let index = 0;
         while (date.getMonth() < 6) {
             if (date.getMonth() !== 0 && date.getDate() === 1) {
                 month++;
-                dateNum = 0;
+                index = 0;
                 datesArr[month] = [];
             }
 
-            datesArr[month][dateNum] = new Intl.DateTimeFormat("da-DK", options).format(date);
+            datesArr[month][index] = new Intl.DateTimeFormat("da-DK", options).format(date);
 
             date.setDate(date.getDate() + 1);
-            dateNum++;
+            index++;
         }
 
         setDates(datesArr);
     }, []);
 
+    //Fetch holidays
     useEffect(() => {
         let flag = true;
 
