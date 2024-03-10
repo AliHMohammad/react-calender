@@ -31,10 +31,10 @@ export default function CalenderColumn({date, holidays}: Props) {
     return (
         <div className={`border border-gray-700 ${letter == "S" || holiday?.nationalHoliday ? "column-light-color": "column-color"}`}>
             <div className="flex justify-between" >
-                <div className={`pr-1 ${letter == "L" && "column-light-color"}`}>
+                <div className={`flex justify-between pr-2.5 ${letter == "L" && "column-light-color"}`}>
                     <span className="mx-1.5 w-3 light-color">{letter}</span>
                     <span className="w-3 light-color">{day}</span>
-                    {holiday?.nationalHoliday && <span className="mx-1.5 light-color">{holiday.name}</span>}
+                    {holiday?.nationalHoliday && <span className="mx-3 light-color">{holiday.name}</span>}
                 </div>
                 <div>
                     {weekNumber && <span className="mx-1.5 light-color font-bold">{weekNumber}</span>}
